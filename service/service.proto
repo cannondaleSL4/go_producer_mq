@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package go_producer_mq.server;
+
+//import "go_producer_mq/data/data.proto";
+import "data/data.proto";
+
+option go_package = "/service";
+
+service LibraryService {
+  rpc AddBook(data.UsersOrder) returns (AddBookResponse);
+}
+
+message AddBookResponse {
+  int64 id = 1;
+}
