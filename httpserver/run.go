@@ -3,6 +3,7 @@ package httpserver
 import (
 	"context"
 	"fmt"
+	"github.com/gorilla/mux"
 	. "go_producer_mq/config"
 	"log"
 	"net/http"
@@ -15,7 +16,7 @@ import (
 // Run will run the HTTP HttpServer
 func Run(config Config) {
 	// Set up a channel to listen to for interrupt signals
-	var runChan = make(chan os.Signal, 1)
+	var runChanH = make(chan os.Signal, 1)
 
 	// Set up a context to allow for graceful server shutdowns in the event
 	// of an OS interrupt (defers the cancel just in case)
@@ -35,7 +36,7 @@ func Run(config Config) {
 	}
 
 	// Handle ctrl+c/ctrl+x interrupt
-	signal.Notify(runChan, os.Interrupt, syscall.SIGTSTP)
+	signal.Notify(runChanH, os.Interrupt, syscall.SIGTSTP)
 
 	// Alert the user that the server is starting
 	log.Printf("HttpServer is starting on %s\n", server.Addr)
@@ -53,7 +54,7 @@ func Run(config Config) {
 
 	// Block on this channel listeninf for those previously defined syscalls assign
 	// to variable so we can let the user know why the server is shutting down
-	interrupt := <-runChan
+	interrupt := <-runChanH
 
 	// If we get one of the pre-prescribed syscalls, gracefully terminate the server
 	// while alerting the user
@@ -70,4 +71,21 @@ func NewRouter() *http.ServeMux {
 		fmt.Fprintf(w, "Hello, you've requested: %s\n", r.URL.Path)
 	})
 	return router
+}
+
+func RunHttpServer(config Config) {
+	// router
+	r := mux.NewRouter()
+	r.HandleFunc("/welcome", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "Hello, you've requested: %s\n", r.URL.Path)
+	})
+
+	log.Printf("INFO: init http api")
+
+	// start server
+	err := http.ListenAndServe(":"+config.HttpServer.Port, r)
+	if err != nil {
+		log.Printf("ERROR: fail init http server, %s", err.Error)
+		os.Exit(1)
+	}
 }

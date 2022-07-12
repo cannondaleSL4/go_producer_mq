@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/google/uuid"
 	"go_producer_mq/data"
 	"math/rand"
 	"time"
@@ -121,6 +122,9 @@ func GetOrder() data.UsersOrder {
 	orders, accountTotal := getProducts()
 
 	return data.UsersOrder{
+		Uuid: &data.UsersOrder_UUID{
+			Value: uuid.NewString(),
+		},
 		Address:      &address,
 		Payed:        intToBool(rand.Intn(2)),
 		User:         &user,

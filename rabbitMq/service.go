@@ -12,15 +12,20 @@ import (
 
 type RabbitMsg struct {
 	QueueName string     `json:"queueName"`
-	Reply     UsersOrder `json:"reply"`
+	Order     UsersOrder `json:"reply"`
 }
+
+//type RabbitMsgSent struct {
+//	QueueName string     `json:"queueName"`
+//	Message   UsersOrder `json:"message"`
+//}
 
 // channel to publish rabbit messages
 var rchan = make(chan RabbitMsg, 10)
 
 func InitProducer(cfg config.Config) {
 	// conn
-	conn, err := NewRabbitMQConn(cfg)
+	conn, err := newRabbitMQConn(cfg)
 	if err != nil {
 		log.Printf("ERROR: fail init consumer: %s", err.Error())
 		os.Exit(1)
@@ -39,7 +44,7 @@ func InitProducer(cfg config.Config) {
 		select {
 		case msg := <-rchan:
 			// marshal
-			data, err := proto.Marshal(&msg.Reply)
+			data, err := proto.Marshal(&msg.Order)
 			if err != nil {
 				log.Printf("ERROR: fail marshal: %s", err.Error())
 				continue
@@ -61,12 +66,12 @@ func InitProducer(cfg config.Config) {
 				continue
 			}
 
-			log.Printf("INFO: published msg: %v to: %s", msg.Reply, msg.QueueName)
+			log.Printf("INFO: published msg: %v to: %s", msg.Order, msg.QueueName)
 		}
 	}
 }
 
-func NewRabbitMQConn(cfg config.Config) (*amqp.Connection, error) {
+func newRabbitMQConn(cfg config.Config) (*amqp.Connection, error) {
 	connAddr := fmt.Sprintf(
 		"amqp://%s:%s@%s:%s/",
 		cfg.RabbitMQ.User,
@@ -75,4 +80,13 @@ func NewRabbitMQConn(cfg config.Config) (*amqp.Connection, error) {
 		cfg.RabbitMQ.Port,
 	)
 	return amqp.Dial(connAddr)
+}
+
+func PublishMessage(message *UsersOrder) {
+
+	msg := RabbitMsg{
+		QueueName: "storage",
+		Order:     *message,
+	}
+	rchan <- msg
 }
