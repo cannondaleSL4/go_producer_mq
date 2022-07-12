@@ -11,6 +11,10 @@ message UsersOrder {
     VIP_USER =1;
   }
 
+  message UUID {
+    string value = 1;
+  }
+
   message UserAddress {
     int32 ZipCode = 1;
     string Country = 2;
@@ -34,10 +38,11 @@ message UsersOrder {
     float cost = 4;
     reserved 5;
   }
-
-  UserAddress Address = 2;
-  User user = 3;
-  repeated Product Order = 4;
-  bool Payed = 5;
-  float accountTotal = 6;
+  UUID uuid = 1;
+  int64 TimeStamp =2;
+  UserAddress Address = 3;
+  User user = 4;
+  repeated Product Order = 5;
+  bool Payed = 6;
+  float accountTotal = 7;
 }

@@ -1,11 +1,11 @@
 package main
 
 import (
-	"fmt"
 	. "go_producer_mq/config"
 	. "go_producer_mq/httpserver"
-	. "go_producer_mq/rabbitMq"
+	rabbitMq "go_producer_mq/rabbitMq"
 	"log"
+	"time"
 )
 
 func main() {
@@ -21,13 +21,15 @@ func main() {
 		log.Fatal(err)
 	}
 
-	//InitProducer(*cfg)
+	go rabbitMq.InitProducer(*cfg)
 
-	// Run the http server
+	go func() {
+		for {
+			time.Sleep(100 * time.Millisecond)
+			data := GetOrder()
+			rabbitMq.PublishMessage(&data)
+		}
+	}()
 
-	InitProducer(*cfg)
-
-	Run(*cfg)
-
-	fmt.Println("test")
+	RunHttpServer(*cfg)
 }
