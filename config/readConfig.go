@@ -3,20 +3,28 @@ package config
 import (
 	"flag"
 	"fmt"
+	"gopkg.in/yaml.v3"
 	"os"
 	"time"
 )
 
 // Config struct for webapp config
 type Config struct {
-	Server struct {
-		// Host is the local machine IP Address to bind the HTTP Server to
+	RabbitMQ struct {
+		User     string `yaml:"user"`
+		Password string `yaml:"password"`
+		Host     string `yaml:"host"`
+		Port     string `yaml:"port"`
+	} `yaml:"rabbitmq"`
+
+	HttpServer struct {
+		// Host is the local machine IP Address to bind the HTTP HttpServer to
 		Host string `yaml:"host"`
 
-		// Port is the local machine TCP Port to bind the HTTP Server to
+		// Port is the local machine TCP Port to bind the HTTP HttpServer to
 		Port    string `yaml:"port"`
 		Timeout struct {
-			// Server is the general server timeout to use
+			// HttpServer is the general server timeout to use
 			// for graceful shutdowns
 			Server time.Duration `yaml:"server"`
 
@@ -58,8 +66,6 @@ func NewConfig(configPath string) (*Config, error) {
 	return config, nil
 }
 
-// ValidateConfigPath just makes sure, that the path provided is a file,
-// that can be read
 func ValidateConfigPath(path string) error {
 	s, err := os.Stat(path)
 	if err != nil {
@@ -79,7 +85,7 @@ func ParseFlags() (string, error) {
 
 	// Set up a CLI flag called "-config" to allow users
 	// to supply the configuration file
-	flag.StringVar(&configPath, "config", "./config.yml", "path to config file")
+	flag.StringVar(&configPath, "config", "./config.yml", "./")
 
 	// Actually parse the flags
 	flag.Parse()

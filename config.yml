@@ -1,0 +1,13 @@
+server:
+  host: 127.0.0.1
+  port: 8080
+  timeout:
+    server: 30s
+    read: 15s
+    write: 10s
+    idle: 5s
+rabbitmq:
+  host: 127.0.0.1
+  port: 5672
+  user: guest
+  password: guest
