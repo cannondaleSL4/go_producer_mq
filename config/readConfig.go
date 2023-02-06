@@ -15,6 +15,7 @@ type Config struct {
 		Password string `yaml:"password"`
 		Host     string `yaml:"host"`
 		Port     string `yaml:"port"`
+		Queue    string `yaml:"queue"`
 	} `yaml:"rabbitmq"`
 
 	HttpServer struct {
