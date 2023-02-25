@@ -1,6 +1,6 @@
 server:
   host: 127.0.0.1
-  port: 8080
+  port: 8081
   timeout:
     server: 30s
     read: 15s
@@ -11,4 +11,4 @@ rabbitmq:
   port: 5672
   user: guest
   password: guest
-  queue: storage
+  queue: myqueue

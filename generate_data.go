@@ -121,7 +121,7 @@ func GetOrder() data.UsersOrder {
 
 	orders, accountTotal := getProducts()
 
-	return data.UsersOrder{
+	myData := data.UsersOrder{
 		Uuid: &data.UsersOrder_UUID{
 			Value: uuid.NewString(),
 		},
@@ -132,6 +132,8 @@ func GetOrder() data.UsersOrder {
 		AccountTotal: accountTotal,
 		TimeStamp:    timestamp(),
 	}
+
+	return myData
 }
 
 func intToBool(number int) bool {

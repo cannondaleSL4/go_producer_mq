@@ -15,13 +15,13 @@ type rabbitMsg struct {
 	Order     UsersOrder `json:"reply"`
 }
 
-type producerStruct struct {
+type ProducerStruct struct {
 	conf config.Config
 }
 
 var rchan = make(chan rabbitMsg, 10)
 
-func (p *producerStruct) InitProducer(cfg config.Config) {
+func (p *ProducerStruct) InitProducer(cfg config.Config) {
 
 	p.conf = cfg
 
@@ -71,7 +71,7 @@ func (p *producerStruct) InitProducer(cfg config.Config) {
 	}
 }
 
-func (p *producerStruct) newRabbitMQConn() (*amqp.Connection, error) {
+func (p *ProducerStruct) newRabbitMQConn() (*amqp.Connection, error) {
 	connAddr := fmt.Sprintf(
 		"amqp://%s:%s@%s:%s/",
 		p.conf.RabbitMQ.User,
@@ -82,7 +82,7 @@ func (p *producerStruct) newRabbitMQConn() (*amqp.Connection, error) {
 	return amqp.Dial(connAddr)
 }
 
-func (p *producerStruct) PublishMessage(message *UsersOrder) {
+func (p *ProducerStruct) PublishMessage(message *UsersOrder) {
 	msg := rabbitMsg{
 		QueueName: p.conf.RabbitMQ.Queue,
 		Order:     *message,

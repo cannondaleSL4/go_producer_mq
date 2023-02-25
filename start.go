@@ -21,13 +21,15 @@ func main() {
 		log.Fatal(err)
 	}
 
-	go rabbitMq.InitProducer(*cfg)
+	producer := &rabbitMq.ProducerStruct{}
+
+	go producer.InitProducer(*cfg)
 
 	go func() {
 		for {
-			time.Sleep(100 * time.Millisecond)
+			time.Sleep(10000 * time.Millisecond)
 			data := GetOrder()
-			rabbitMq.PublishMessage(&data)
+			producer.PublishMessage(&data)
 		}
 	}()
 
