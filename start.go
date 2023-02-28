@@ -26,8 +26,13 @@ func main() {
 	go producer.InitProducer(*cfg)
 
 	go func() {
+		var counter int = 0
 		for {
-			time.Sleep(10000 * time.Millisecond)
+			if (counter % 10000) == 0 {
+				counter = 0
+				time.Sleep(10000 * time.Millisecond)
+			}
+			counter++
 			data := GetOrder()
 			producer.PublishMessage(&data)
 		}
