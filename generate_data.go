@@ -43,16 +43,7 @@ func init() {
 	street[8] = "Malaya Iamskaia"
 	street[9] = "Medisson St."
 
-	country[0] = "Russia"
-	country[1] = "Ukraine"
-	country[2] = "Kazahstan"
-	country[3] = "Kyrgiztan"
-	country[4] = "Belarussia"
-	country[5] = "Poland"
-	country[6] = "Germanya"
-	country[7] = "Gb.Britain"
-	country[8] = "Turkey"
-	country[9] = "Usa"
+	country = []string{"Australia", "Canada", "Saudi Arabia", "United States", "India", "Russia", "South Africa", "Turkey", "Argentina", "Brazil", "Mexico", "France", "Germany", "Italy", "United Kingdom", "China", "Indonesia", "Japan", "South Korea"}
 
 	state[0] = "New York"
 	state[1] = "Massachusetts"
@@ -65,38 +56,56 @@ func init() {
 	state[8] = "Washington"
 	state[9] = "South Coraline"
 
-	city[0] = "New York"
-	city[1] = "Chicago"
-	city[2] = "Boston"
-	city[3] = "Los Angeles"
-	city[4] = "Moscow"
-	city[5] = "Nizhniy Novgorod"
-	city[6] = "Kstovo"
-	city[7] = "Berlin"
-	city[8] = "Viena"
-	city[9] = "London"
+	city = []string{
+		"London", "Paris", "New York", "Tokyo", "Dubai", "Barcelona", "Rome", "Madrid", "Singapore", "Amsterdam",
+		"Prague", "Los Angeles", "Chicago", "San Francisco", "Berlin", "Hong Kong", "Washington", "Beijing", "Dublin",
+		"Istanbul", "Las Vegas", "Milan", "Budapest", "Toronto", "Sydney", "Seoul", "Doha", "Abu Dhabi", "Osaka",
+		"Bangkok", "Vienna", "San Diego", "São Paulo", "Melbourne", "Zurich", "Boston", "Lisbon", "Warsaw", "Seattle",
+		"Orlando", "Munich", "Houston", "Austin", "Buenos Aires", "Naples", "Copenhagen", "Dallas", "Helsinki",
+		"Frankfurt", "Atlanta", "Stockholm", "Miami", "Athens", "Rio de Janeiro", "Hamburg", "Denver", "Montreal",
+		"Brussels", "Tel Aviv", "Oslo", "Taipei", "Valencia", "Minneapolis", "Philadelphia", "Calgary", "Portland",
+		"Nashville", "Auckland", "Vancouver", "Santiago", "Mexico City", "Mumbai", "Shanghai", "San Jose", "Lyon",
+		"Bilbao", "Liverpool", "New Orleans", "Brisbane", "Manchester", "Fukuoka", "Seville", "Riyadh", "Jerusalem",
+		"Nanjing", "Minsk", "Salt Lake City", "Phoenix", "Jakarta", "Gothenburg", "Perth", "Glasgow", "Nagoya",
+		"Baltimore", "Stuttgart", "Ottawa", "Hanoi", "Sendai", "Cologne", "Marseille",
+	}
 
-	firstName[0] = "Evgenia"
-	firstName[1] = "Kira"
-	firstName[2] = "Dmitriy"
-	firstName[3] = "Michail"
-	firstName[4] = "Jhon"
-	firstName[5] = "Mikle"
-	firstName[6] = "Igor"
-	firstName[7] = "Nikita"
-	firstName[8] = "Anon"
-	firstName[9] = "Ira"
+	firstName = []string{
+		"Muhammad", "Noah", "Jack", "Theo", "Leo", "Oliver", "George", "Ethan", "Oscar", "Arthur",
+		"Charlie", "Freddie", "Harry", "Zayn", "Alfie", "Finley", "Henry", "Luca", "Thomas", "Aiden",
+		"Archie", "Teddy", "Lucas", "Ryan", "Kai", "Liam", "Jaxon", "Louie", "William", "Jacob",
+		"Ali", "Caleb", "Isaac", "Joshua", "Jude", "James", "Jayden", "Adam", "Arlo", "Daniel",
+		"Elijah", "Max", "Tommy", "Ezra", "Mason", "Theodore", "Roman", "Dylan", "Reuben", "Albie",
+		"Alexander", "Toby", "Yusuf", "Logan", "Rory", "Alex", "Harrison", "Kayden", "Nathan", "Ollie",
+		"Ayaan", "Elliot", "Ahmad", "Kian", "Samuel", "Hudson", "Jason", "Myles", "Rowan", "Benjamin",
+		"Finn", "Omar", "Riley", "Zachary", "Brodie", "Michael", "Abdullah", "Matthew", "Sebastian", "Hugo",
+		"Jesse", "Junior", "Oakley", "Abdul", "Eli", "Grayson", "Mateo", "Reggie", "Gabriel", "Hunter",
+		"Levi", "Ibrahim", "Jasper", "Syed", "Zion", "Luke", "Seth", "Aaron", "Asher", "Blake",
+		"Lily", "Sophia", "Olivia", "Amelia", "Ava", "Isla", "Freya", "Aria", "Ivy", "Mia",
+		"Elsie", "Emily", "Ella", "Grace", "Isabella", "Evie", "Hannah", "Luna", "Maya", "Daisy",
+		"Zoe", "Millie", "Rosie", "Layla", "Isabelle", "Zara", "Fatima", "Harper", "Nur", "Charlotte",
+		"Esme", "Florence", "Maryam", "Poppy", "Sienna", "Sophie", "Aisha", "Emilia", "Willow", "Emma",
+		"Evelyn", "Eliana", "Maisie", "Alice", "Chloe", "Erin", "Hallie", "Mila", "Phoebe", "Lyla",
+		"Ada", "Lottie", "Ellie", "Matilda", "Molly", "Ruby", "Ayla", "Sarah", "Maddison", "Aaliyah",
+		"Aurora", "Maeve", "Bella", "Nova", "Robyn", "Arabella", "Eva", "Lucy", "Eden", "Gracie",
+		"Jessica", "Amaya", "Anna", "Leah", "Violet", "Eleanor", "Maria", "Olive", "Orla", "Abigail", "Eliza", "Rose", "Talia",
+		"Elizabeth", "Gianna", "Holly", "Imogen", "Nancy", "Annabelle", "Hazel", "Margot", "Raya", "Bonnie",
+		"Nina", "Nora", "Penelope", "Scarlett", "Anaya", "Delilah", "Iris",
+	}
 
-	secondName[0] = "Smith"
-	secondName[1] = "Johnson"
-	secondName[2] = "Williams"
-	secondName[3] = "Brown"
-	secondName[4] = "Jones"
-	secondName[5] = "Garcia"
-	secondName[6] = "Miller"
-	secondName[7] = "Davis"
-	secondName[8] = "Rodriguez"
-	secondName[9] = "Martinez"
+	secondName = []string{
+		"Wang", "Li", "Zhang", "Chen", "Liu", "Devi", "Yang", "Huang", "Singh", "Wu",
+		"Kumar", "Xu", "Ali", "Zhao", "Zhou", "Nguyen", "Khan", "Ma", "Lu", "Zhu",
+		"Maung", "Sun", "Yu", "Lin", "Kim", "He", "Hu", "Jiang", "Guo", "Ahmed",
+		"Khatun", "Luo", "Akter", "Gao", "Zheng", "da Silva", "Tang", "Liang", "Das",
+		"Wei", "Mohamed", "Islam", "Shi", "Song", "Xie", "Han", "Garcia", "Mohammad",
+		"Tan", "Deng", "Bai", "Ahmad", "Yan", "Kaur", "Feng", "Hernandez", "Rodriguez",
+		"Cao", "Lopez", "Hassan", "Hussain", "Gonzalez", "Martinez", "Ceng", "Ibrahim",
+		"Peng", "Cai", "Xiao", "Tran", "dos Santos", "Cheng", "Yuan", "Rahman", "Yadav",
+		"Su", "Perez", "I", "Le", "Fan", "Dong", "Ye", "Ram", "Tian", "Fu", "Hossain",
+		"Kumari", "Sanchez", "Du", "Pereira", "Yao", "Zhong", "Jin", "Pak", "Ding",
+		"Mohammed", "Lal", "Yin", "Bibi",
+	}
 }
 
 func GetOrder() data.UsersOrder {

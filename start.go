@@ -5,7 +5,6 @@ import (
 	. "go_producer_mq/httpserver"
 	rabbitMq "go_producer_mq/rabbitMq"
 	"log"
-	"time"
 )
 
 func main() {
@@ -26,17 +25,88 @@ func main() {
 	go producer.InitProducer(*cfg)
 
 	go func() {
-		var counter int = 0
+		//var counter int = 0
 		for {
-			if (counter % 10000) == 0 {
-				counter = 0
-				time.Sleep(10000 * time.Millisecond)
-			}
-			counter++
+			//if (counter % 10000) == 0 {
+			//	counter = 0
+			//	time.Sleep(1000 * time.Millisecond)
+			//}
+			//counter++
 			data := GetOrder()
 			producer.PublishMessage(&data)
+			//time.Sleep(1000 * time.Millisecond)
 		}
 	}()
+
+	//go func() {
+	//	//var counter int = 0
+	//	for {
+	//		//if (counter % 10000) == 0 {
+	//		//	counter = 0
+	//		//	time.Sleep(1000 * time.Millisecond)
+	//		//}
+	//		//counter++
+	//		data := GetOrder()
+	//		producer.PublishMessage(&data)
+	//		//time.Sleep(1000 * time.Millisecond)
+	//	}
+	//}()
+	//
+	//go func() {
+	//	//var counter int = 0
+	//	for {
+	//		//if (counter % 10000) == 0 {
+	//		//	counter = 0
+	//		//	time.Sleep(1000 * time.Millisecond)
+	//		//}
+	//		//counter++
+	//		data := GetOrder()
+	//		producer.PublishMessage(&data)
+	//		//time.Sleep(1000 * time.Millisecond)
+	//	}
+	//}()
+	//
+	//go func() {
+	//	//var counter int = 0
+	//	for {
+	//		//if (counter % 10000) == 0 {
+	//		//	counter = 0
+	//		//	time.Sleep(1000 * time.Millisecond)
+	//		//}
+	//		//counter++
+	//		data := GetOrder()
+	//		producer.PublishMessage(&data)
+	//		//time.Sleep(1000 * time.Millisecond)
+	//	}
+	//}()
+	//
+	//go func() {
+	//	//var counter int = 0
+	//	for {
+	//		//if (counter % 10000) == 0 {
+	//		//	counter = 0
+	//		//	time.Sleep(1000 * time.Millisecond)
+	//		//}
+	//		//counter++
+	//		data := GetOrder()
+	//		producer.PublishMessage(&data)
+	//		//time.Sleep(1000 * time.Millisecond)
+	//	}
+	//}()
+	//
+	//go func() {
+	//	//var counter int = 0
+	//	for {
+	//		//if (counter % 10000) == 0 {
+	//		//	counter = 0
+	//		//	time.Sleep(1000 * time.Millisecond)
+	//		//}
+	//		//counter++
+	//		data := GetOrder()
+	//		producer.PublishMessage(&data)
+	//		//time.Sleep(1000 * time.Millisecond)
+	//	}
+	//}()
 
 	RunHttpServer(*cfg)
 }
