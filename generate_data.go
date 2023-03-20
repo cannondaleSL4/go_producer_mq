@@ -13,11 +13,11 @@ var productPrice map[string]float32
 
 func init() {
 	street = make([]string, 10)
-	country = make([]string, 10)
+	country = make([]string, 20)
 	state = make([]string, 10)
-	city = make([]string, 10)
-	firstName = make([]string, 10)
-	secondName = make([]string, 10)
+	city = make([]string, 100)
+	firstName = make([]string, 100)
+	secondName = make([]string, 100)
 	productPrice = make(map[string]float32)
 
 	productPrice["milk"] = 3.25

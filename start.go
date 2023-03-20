@@ -1,15 +1,15 @@
 package main
 
 import (
+	"fmt"
 	. "go_producer_mq/config"
 	. "go_producer_mq/httpserver"
 	rabbitMq "go_producer_mq/rabbitMq"
 	"log"
+	"os"
 )
 
 func main() {
-	//data := GetOrder()
-	//fmt.Println(data)
 
 	cfgPath, err := ParseFlags()
 	if err != nil {
@@ -21,6 +21,13 @@ func main() {
 	}
 
 	producer := &rabbitMq.ProducerStruct{}
+
+	ok, _ := producer.QueueExists(*cfg)
+
+	if !ok {
+		fmt.Println("queue does not exist. program execution stops.")
+		os.Exit(1)
+	}
 
 	go producer.InitProducer(*cfg)
 
@@ -34,6 +41,7 @@ func main() {
 			//counter++
 			data := GetOrder()
 			producer.PublishMessage(&data)
+			//time.Sleep(10000 * time.Millisecond)
 			//time.Sleep(1000 * time.Millisecond)
 		}
 	}()

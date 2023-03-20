@@ -3,19 +3,22 @@ package config
 import (
 	"flag"
 	"fmt"
-	"gopkg.in/yaml.v3"
 	"os"
 	"time"
+
+	"gopkg.in/yaml.v3"
 )
 
 // Config struct for webapp config
 type Config struct {
 	RabbitMQ struct {
-		User     string `yaml:"user"`
-		Password string `yaml:"password"`
-		Host     string `yaml:"host"`
-		Port     string `yaml:"port"`
-		Queue    string `yaml:"queue"`
+		User          string        `yaml:"user"`
+		Password      string        `yaml:"password"`
+		Host          string        `yaml:"host"`
+		Port          string        `yaml:"port"`
+		Queue         string        `yaml:"queue"`
+		RetryInterval time.Duration `yaml:"retryInterval"`
+		MaxRetries    int           `yaml:"maxRetries"`
 	} `yaml:"rabbitmq"`
 
 	HttpServer struct {

@@ -12,3 +12,5 @@ rabbitmq:
   user: guest
   password: guest
   queue: myqueue
+  retryInterval: 60s
+  maxRetries: 10
